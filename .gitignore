@@ -1,0 +1,13 @@
+# Downloaded archives and extracted capture files are never committed.
+data/raw/
+data/pcap/
+
+# Generated analysis artifacts.
+output/
+
+# Local secrets (the malware-traffic-analysis.net archive password).
+.env
+
+.venv/
+__pycache__/
+*.py[cod]

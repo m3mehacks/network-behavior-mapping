@@ -1,0 +1,32 @@
+# Cases analysed by the pipeline. Each entry points at a malware-traffic-analysis.net
+# post; the fetcher scrapes that page and downloads only the allowlisted capture files.
+cases:
+  - id: 2024-10-23-redline-stealer
+    post: https://www.malware-traffic-analysis.net/2024/10/23/index.html
+    family: Redline Stealer
+    summary: Infostealer infection with HTTP-based exfiltration.
+    tags: [infostealer, http-exfil]
+
+  - id: 2024-12-17-netsupport-rat
+    post: https://www.malware-traffic-analysis.net/2024/12/17/index.html
+    family: NetSupport RAT
+    summary: SmartApeSG injected script leading to NetSupport RAT check-ins.
+    tags: [drive-by, rat, beaconing]
+
+  - id: 2024-06-25-latrodectus
+    post: https://www.malware-traffic-analysis.net/2024/06/25/index.html
+    family: Latrodectus
+    summary: Loader infection with BackConnect and Keyhole VNC, steady C2 beaconing.
+    tags: [loader, backconnect, beaconing]
+
+  - id: 2024-08-26-guloader-remcos
+    post: https://www.malware-traffic-analysis.net/2024/08/26/index.html
+    family: GuLoader / Remcos RAT
+    summary: GuLoader delivering Remcos RAT, TLS C2 over non-standard ports.
+    tags: [loader, rat, tls, non-standard-port]
+
+  - id: 2024-11-14-raspberry-robin
+    post: https://www.malware-traffic-analysis.net/2024/11/14/index.html
+    family: Raspberry Robin
+    summary: Infection using a WebDAV server, unusual protocol and port profile.
+    tags: [worm, webdav]

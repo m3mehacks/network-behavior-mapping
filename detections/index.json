@@ -1,0 +1,15 @@
+{
+  "generated_from": [
+    "2024-10-23-redline-stealer",
+    "2024-12-17-netsupport-rat",
+    "2024-06-25-latrodectus",
+    "2024-08-26-guloader-remcos",
+    "2024-11-14-raspberry-robin"
+  ],
+  "counts": {
+    "suricata": 218,
+    "zeek": 3,
+    "sigma": 6,
+    "kql": 4
+  }
+}

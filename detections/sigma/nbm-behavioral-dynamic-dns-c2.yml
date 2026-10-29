@@ -1,0 +1,39 @@
+title: Lookup Of Dynamic DNS Domain Frequently Abused For C2
+id: 3d5e8a17-9b42-4f60-a7c3-8e1b2d4f9a55
+status: experimental
+description: |
+  Commodity RATs such as Remcos, NetSupport and AsyncRAT routinely point their C2 at free
+  dynamic DNS providers, because the operator can repoint the name without re-building the
+  implant. One of the analysed captures resolved a duckdns.org name immediately before
+  opening a long-lived RAT session on a non-standard port.
+
+  Behavioural rather than indicator-based, so it survives infrastructure rotation. Baseline
+  first: some organisations legitimately use dynamic DNS for remote access.
+references:
+    - https://www.malware-traffic-analysis.net/2024/08/26/index.html
+author: network-behavior-mapping
+date: 2026-09-19
+tags:
+    - attack.command-and-control
+    - attack.t1071.004
+    - attack.t1568
+logsource:
+    category: dns_query
+detection:
+    selection:
+        QueryName|endswith:
+            - '.duckdns.org'
+            - '.no-ip.org'
+            - '.no-ip.com'
+            - '.no-ip.biz'
+            - '.ddns.net'
+            - '.hopto.org'
+            - '.zapto.org'
+            - '.sytes.net'
+            - '.serveo.net'
+            - '.ngrok.io'
+    condition: selection
+falsepositives:
+    - Home lab and remote access tooling used by administrators.
+    - Some IoT vendors resolve dynamic DNS names by design.
+level: medium

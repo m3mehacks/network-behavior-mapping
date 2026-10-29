@@ -1,0 +1,36 @@
+title: Executable Downloaded Under A Non-Executable Content Type
+id: 0c9b3f28-5a74-4e16-b8d5-2f7a1c6e9048
+status: experimental
+description: |
+  The response body begins with the MZ magic bytes of a Windows PE file while the server
+  declares a text, image or generic content type. Legitimate software distribution does not
+  need to disguise what it is serving, so the mismatch itself is the signal rather than any
+  specific URL.
+
+  This fires on the delivery step, which is earlier in the intrusion than any C2 detection
+  and therefore more useful.
+references:
+    - https://www.malware-traffic-analysis.net/
+author: network-behavior-mapping
+date: 2026-09-19
+tags:
+    - attack.command-and-control
+    - attack.t1105
+logsource:
+    category: proxy
+detection:
+    selection:
+        c-uri-extension|contains:
+            - '.png'
+            - '.jpg'
+            - '.gif'
+            - '.txt'
+            - '.css'
+    file_magic:
+        sc-content-type|startswith:
+            - 'text/'
+            - 'image/'
+    condition: selection and file_magic
+falsepositives:
+    - Misconfigured web servers returning a default content type for binary downloads.
+level: high

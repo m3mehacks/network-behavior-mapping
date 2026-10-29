@@ -1,0 +1,54 @@
+title: Long Lived Outbound Connection To Uncommon Port
+id: 7a4c2e81-6d39-4b57-9f02-3c8e5a1b7d64
+status: experimental
+description: |
+  A RAT that keeps one socket open replaces the usual pattern of repeated short connections,
+  so volume-based and connection-count detections miss it. In the analysed captures a Remcos
+  session was held open for 52 minutes on tcp/3980 and a Raspberry Robin infection used
+  tcp/9001, tcp/110 and tcp/28003.
+
+  Behavioural. The port list is deliberately exclusive rather than inclusive, so this needs
+  an environment baseline before it is raised above medium.
+references:
+    - https://www.malware-traffic-analysis.net/2024/08/26/index.html
+    - https://www.malware-traffic-analysis.net/2024/11/14/index.html
+author: network-behavior-mapping
+date: 2026-09-19
+tags:
+    - attack.command-and-control
+    - attack.t1571
+logsource:
+    category: network_connection
+detection:
+    selection:
+        Initiated: 'true'
+    filter_common_ports:
+        DestinationPort:
+            - 80
+            - 88
+            - 123
+            - 135
+            - 389
+            - 443
+            - 445
+            - 465
+            - 587
+            - 636
+            - 993
+            - 995
+            - 3128
+            - 3389
+            - 8080
+            - 8443
+    filter_internal:
+        DestinationIp|cidr:
+            - '10.0.0.0/8'
+            - '172.16.0.0/12'
+            - '192.168.0.0/16'
+            - '127.0.0.0/8'
+            - '169.254.0.0/16'
+    condition: selection and not 1 of filter_*
+falsepositives:
+    - Line of business applications using bespoke ports.
+    - Game clients, VPNs, peer to peer software and software update agents.
+level: medium

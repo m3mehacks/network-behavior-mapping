@@ -1,0 +1,29 @@
+title: HTTP POST To Bare IP Address Without User Agent
+id: e2f6a903-4b81-4d27-9c50-7a3e8b1f5d92
+status: experimental
+description: |
+  In the analysed Redline Stealer capture the implant posted roughly one megabyte of stolen
+  data as SOAP XML to a bare IP address on tcp/55123, with no User-Agent header and no
+  preceding DNS lookup. Each of those properties is individually weak and unusual in
+  combination: browsers send a User-Agent, and normal applications resolve a name first.
+references:
+    - https://www.malware-traffic-analysis.net/2024/10/23/index.html
+author: network-behavior-mapping
+date: 2026-09-19
+tags:
+    - attack.exfiltration
+    - attack.t1041
+    - attack.command-and-control
+    - attack.t1071.001
+logsource:
+    category: proxy
+detection:
+    selection:
+        cs-method: 'POST'
+        cs-host|re: '^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(:\d+)?$'
+    filter_useragent:
+        cs-user-agent|contains: 'Mozilla'
+    condition: selection and not filter_useragent
+falsepositives:
+    - Internal API clients and monitoring agents addressing servers by IP.
+level: high

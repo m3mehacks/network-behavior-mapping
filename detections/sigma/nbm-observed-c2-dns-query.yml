@@ -1,0 +1,91 @@
+title: DNS Query For C2 Domain Observed In Malware Captures
+id: 6f2a1c94-7e3d-4c18-9a6b-1d0e5f3b8c21
+status: experimental
+description: |
+  Resolves a domain observed acting as command and control infrastructure in analysed
+  malware captures (GuLoader / Remcos RAT, Latrodectus, NetSupport RAT, Raspberry Robin, Redline Stealer). Indicator-based and therefore perishable;
+  the underlying infrastructure rotates within days.
+references:
+    - https://www.malware-traffic-analysis.net/
+author: network-behavior-mapping
+date: 2026-09-19
+tags:
+    - attack.command-and-control
+    - attack.t1071.004
+logsource:
+    category: dns_query
+detection:
+    selection:
+        QueryName:
+            - '188.190.10.10'
+            - '2z.si'
+            - '735dba63.bright-witted.skin'
+            - '85.208.108.30'
+            - 'account.bbc.com'
+            - 'api.ip.sb'
+            - 'api.msn.com'
+            - 'arc.msn.com'
+            - 'assets.msn.com'
+            - 'b-ring.msedge.net'
+            - 'banks-canada.com'
+            - 'barsman.biz'
+            - 'bibidj.biz'
+            - 'browser.events.data.msn.com'
+            - 'bzib.nelreports.net'
+            - 'c.msn.com'
+            - 'clients2.googleusercontent.com'
+            - 'config.edge.skype.com'
+            - 'depostsolo.biz'
+            - 'edge-consumer-static.azureedge.net'
+            - 'edge-mobile-static.azureedge.net'
+            - 'edgeassetservice.azureedge.net'
+            - 'finjuiceer.com'
+            - 'fp-afd.azureedge.net'
+            - 'fp.msedge.net'
+            - 'garunt.biz'
+            - 'geo.netsupportsoftware.com'
+            - 'geoplugin.net'
+            - 'img-s-msn-com.akamaized.net'
+            - 'janbours92harbu03.duckdns.org'
+            - 'k-ring.msedge.net'
+            - 'meakdgahup.com'
+            - 'ntp.msn.com'
+            - 'ow1.res.office365.com'
+            - 'r10.o.lencr.org'
+            - 'r11.o.lencr.org'
+            - 'riscoarchez.com'
+            - 'sb.scorecardresearch.com'
+            - 'softiq.ro'
+            - 'spo-ring.msedge.net'
+            - 'srtb.msn.com'
+            - 'taktlat.xyz'
+            - 'teams-ring.msedge.net'
+            - 'w3-reporting-nel.reddit.com'
+            - 'wallet-static.azureedge.net'
+            - 'windows.msn.com'
+            - 'www.43oy4koz65rj756yfmnk7wtip.com'
+            - 'www.46vwtg.com'
+            - 'www.bpgluls4z73vw.com'
+            - 'www.cssfd5p5cezgcr2yw.com'
+            - 'www.eag3z5qjlh.com'
+            - 'www.f4lbnxd5dgegwmnboith34.com'
+            - 'www.h3vwdoskpr5eqyjrs.com'
+            - 'www.hspyh52.com'
+            - 'www.ixolgnuujpiks6skeu.com'
+            - 'www.msn.com'
+            - 'www.on2x3gnnpupifbfdp.com'
+            - 'www.q7xi3oldut.com'
+            - 'www.reddit.com'
+            - 'www.sdeq3iozavf.com'
+            - 'www.stkrrkb3mvqt.com'
+            - 'www.u5opnofx.com'
+            - 'www.u7tlc2waowd.com'
+            - 'www.vfnbzcosotyp.com'
+            - 'www.vn7hq5cssukfmtpltom2d.com'
+            - 'www.y47v7333l46da5v7vb.com'
+            - 'x1.c.lencr.org'
+            - 'xpaycdn.azureedge.net'
+    condition: selection
+falsepositives:
+    - A domain may be reclaimed by a legitimate owner after the campaign ends.
+level: high
